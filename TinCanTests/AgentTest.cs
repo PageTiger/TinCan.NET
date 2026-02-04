@@ -59,5 +59,17 @@ namespace TinCanTests
             Assert.IsInstanceOf<Agent>(obj);
             Assert.That(obj.mbox, Is.EqualTo(mbox));
         }
+
+        [Test]
+        public void TestAgentAccountUriSerialization()
+        {
+            var account = new AgentAccount
+            {
+                homePage = new Uri("http://adlnet.gov/home/%20page")
+            };
+
+            var json = account.ToJObject(TCAPIVersion.latest());
+            Assert.AreEqual("http://adlnet.gov/home/%20page", json["homePage"].ToString(), "AgentAccount.homePage serialization failed to preserve encoding");
+        }
     }
 }

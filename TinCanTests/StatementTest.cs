@@ -61,5 +61,17 @@ namespace TinCanTests
             Assert.IsInstanceOf<Statement>(obj);
             Assert.IsInstanceOf<SubStatement>(obj.target);
         }
+
+        [Test]
+        public void TestStatementsQueryUriSerialization()
+        {
+            var query = new StatementsQuery
+            {
+                verbId = new Uri("http://adlnet.gov/expapi/verbs/%20test")
+            };
+
+            var paramsMap = query.ToParameterMap(TCAPIVersion.latest());
+            Assert.AreEqual("http://adlnet.gov/expapi/verbs/%20test", paramsMap["verb"], "StatementsQuery.verbId serialization failed to preserve encoding");
+        }
     }
 }

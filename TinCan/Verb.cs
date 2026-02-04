@@ -54,7 +54,7 @@ namespace TinCan
             JObject result = new JObject();
             if (id != null)
             {
-                result.Add("id", id.ToString());
+                result.Add("id", id.AbsoluteUri);
             }
 
             if (display != null && ! display.isEmpty())

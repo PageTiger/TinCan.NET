@@ -119,11 +119,11 @@ namespace TinCan
 
             if (type != null)
             {
-                result.Add("type", type.ToString());
+                result.Add("type", type.AbsoluteUri);
             }
             if (moreInfo != null)
             {
-                result.Add("moreInfo", moreInfo.ToString());
+                result.Add("moreInfo", moreInfo.AbsoluteUri);
             }
             if (name != null && ! name.isEmpty())
             {

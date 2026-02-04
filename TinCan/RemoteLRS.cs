@@ -105,7 +105,7 @@ namespace TinCan
             }
             else
             {
-                url = endpoint.ToString();
+                url = endpoint.AbsoluteUri;
                 if (! url.EndsWith("/") && ! req.resource.StartsWith("/")) {
                     url += "/";
                 }

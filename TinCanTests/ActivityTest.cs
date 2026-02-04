@@ -15,6 +15,7 @@
 */
 namespace TinCanTests
 {
+    using System;
     using NUnit.Framework;
     using TinCan;
 
@@ -50,6 +51,24 @@ namespace TinCanTests
                     activity.id = invalid;
                 }
             );
+        }
+
+        [Test]
+        public void TestActivityDefinitionUriSerialization()
+        {
+            var moreInfo = new Uri("mailto:email@adlnet.gov?cc=cc@adlnet.gov&subject=Message%20Subject&body=This%20is%20a%20long%20message");
+            var type = new Uri("http://adlnet.gov/expapi/activities/test/%20with%20space");
+
+            var def = new ActivityDefinition
+            {
+                moreInfo = moreInfo,
+                type = type
+            };
+
+            var json = def.ToJObject(TCAPIVersion.latest());
+
+            Assert.AreEqual("mailto:email@adlnet.gov?cc=cc@adlnet.gov&subject=Message%20Subject&body=This%20is%20a%20long%20message", json["moreInfo"].ToString(), "ActivityDefinition.moreInfo serialization failed to preserve encoding");
+            Assert.AreEqual("http://adlnet.gov/expapi/activities/test/%20with%20space", json["type"].ToString(), "ActivityDefinition.type serialization failed to preserve encoding");
         }
     }
 }

@@ -59,5 +59,17 @@ namespace TinCanTests
             Assert.IsInstanceOf<Verb>(obj);
             Assert.That(obj.ToJSON(), Is.EqualTo(json));
         }
+
+        [Test]
+        public void TestVerbUriSerialization()
+        {
+            var verb = new Verb
+            {
+                id = new Uri("http://adlnet.gov/expapi/verbs/%20test")
+            };
+
+            var json = verb.ToJObject(TCAPIVersion.latest());
+            Assert.AreEqual("http://adlnet.gov/expapi/verbs/%20test", json["id"].ToString(), "Verb.id serialization failed to preserve encoding");
+        }
     }
 }
