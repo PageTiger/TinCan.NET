@@ -47,8 +47,8 @@ jobs:
         run: nuget pack .\TinCan -Properties Configuration=${env:BUILD_CONFIG}
         
       - name: Create Release
-        uses: softprops/action-gh-release@v2
+        uses: ncipollo/release-action@v1
         with:
           name: TinCan ${{ github.run }}
-          files: "*.nupkg"
+          artifacts: "*.nupkg"
         
