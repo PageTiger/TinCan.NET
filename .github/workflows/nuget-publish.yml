@@ -46,9 +46,9 @@ jobs:
       - name: Pack
         run: nuget pack .\TinCan -Properties Configuration=${env:BUILD_CONFIG}
         
-      - name: Create Release
-        uses: ncipollo/release-action@v1
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
         with:
-          name: TinCan ${{ github.run }}
-          artifacts: "*.nupkg"
+          name: tincan-nuget-packages
+          path: "*.nupkg"
         
