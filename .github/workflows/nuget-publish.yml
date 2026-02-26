@@ -46,9 +46,9 @@ jobs:
       - name: Pack
         run: nuget pack .\TinCan -Properties Configuration=${env:BUILD_CONFIG}
         
-      - name: Add Nuget Source
-        run: nuget sources add -Name "GitHub" -Source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" -Username "${{ github.repository_owner }}" -Password "${{ secrets.GITHUB_TOKEN }}" -StorePasswordInClearText
-        
-      - name: Publish
-        run: nuget push .\TinCan.*.nupkg -Source "GitHub"
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: TinCan ${{ github.run }}
+          files: "*.nupkg"
         
