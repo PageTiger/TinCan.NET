@@ -10,7 +10,7 @@ jobs:
     runs-on: windows-2025
 
     env:
-      BUILD_CONFIG: Release
+      BUILD_CONFIG: Release-net45
       NET_45_URL: 'https://www.nuget.org/api/v2/package/Microsoft.NETFramework.ReferenceAssemblies.net45/1.0.3'
       SDK_SYSTEM_PATH: 'C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework'
 
